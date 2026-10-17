@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" viewport-fit=cover">
+  <title>About SHINE & CO.</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <section class="story" id="story">
+    <div class="story-in">
+
+      <div class="story-text">
+        <span class="story-eyebrow">OUR STORY</span>
+        <h2>For the love of<br><em>good moments.</em></h2>
+
+        <p class="story-lead">At SHINE &amp; CO., we believe a good restaurant is more than what is on the plate.</p>
+
+        <p>It is the warmth of being welcomed through the door, a table prepared with care, food made to be shared, and
+          the feeling that there is always time for one more conversation.</p>
+        <p>We created SHINE &amp; CO. as a place that feels familiar from the very first visit — warm, inviting, and
+          easy to settle into.</p>
+        <p>Our kitchen is all about food made with care and meant to be enjoyed together. Our tables are here for long
+          lunches, slow evenings, celebrations, catch-ups, and all the little occasions in between.</p>
+        <p>Whether you're joining us for a quick bite or staying a little longer, we want you to feel at home.</p>
+
+        <p class="story-sign"><span>✦</span> Good food, a warm welcome, and a table waiting for you.</p>
+      </div>
+
+      <figure class="story-photo">
+        <img src="photos/rest-photo.jpg" alt="Lantern-lit SHINE &amp; CO. dining room with a waiter attending a table"
+          loading="lazy">
+      </figure>
+
+    </div>
+  </section>
+
+
+
+  <section class="gallery" id="gallery">
+    <div class="gallery-in">
+
+      <header class="gallery-head">
+        <span class="gallery-eyebrow">GALLERY</span>
+        <h2>A little look <em>inside.</em></h2>
+      </header>
+
+      <div class="gallery-grid">
+        <figure class="g g1" data-reveal>
+          <button type="button" class="g-btn" aria-label="Open photo: The warm glow of our dining room">
+            <img src="photos/restaurant1.png" alt="Warm glow of our dining room" loading="lazy">
+            <figcaption>The warm glow of our dining room</figcaption>
+          </button>
+        </figure>
+        <figure class="g g2" data-reveal>
+          <button type="button" class="g-btn" aria-label="Open photo: Fresh from the oven">
+            <img src="photos/restaurant1.png" alt="Fresh bread from the oven" loading="lazy">
+            <figcaption>Fresh from the oven</figcaption>
+          </button>
+        </figure>
+        <figure class="g g3" data-reveal>
+          <button type="button" class="g-btn" aria-label="Open photo: A table set with care">
+            <img src="gallery-3.jpg" alt="A table set with care" loading="lazy">
+            <figcaption>A table set with care</figcaption>
+          </button>
+        </figure>
+        <figure class="g g4" data-reveal>
+          <button type="button" class="g-btn" aria-label="Open photo: Made to be shared">
+            <img src="gallery-4.jpg" alt="Dishes made to be shared" loading="lazy">
+            <figcaption>Made to be shared</figcaption>
+          </button>
+        </figure>
+        <figure class="g g5" data-reveal>
+          <button type="button" class="g-btn" aria-label="Open photo: Morning coffee">
+            <img src="gallery-5.jpg" alt="Morning coffee" loading="lazy">
+            <figcaption>Morning coffee</figcaption>
+          </button>
+        </figure>
+        <figure class="g g6" data-reveal>
+          <button type="button" class="g-btn" aria-label="Open photo: Slow evenings, long conversations">
+            <img src="gallery-6.jpg" alt="Slow evening at the restaurant" loading="lazy">
+            <figcaption>Slow evenings, long conversations</figcaption>
+          </button>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX (</body>'den hemen önce) -->
+  <div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lb-close" type="button" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="lb-stage">
+      <button class="lb-nav lb-prev" type="button" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 4l-8 8 8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+      <figure class="lb-fig">
+        <img class="lb-img" src="" alt="">
+        <figcaption class="lb-cap"><span class="lb-text"></span><span class="lb-count"></span></figcaption>
+      </figure>
+      <button class="lb-nav lb-next" type="button" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+
+  <script>
+    (function () {
+      document.documentElement.classList.add('js');
+
+      /* scroll reveal */
+      var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+      items.forEach(function (el, i) { el.style.setProperty('--d', (i % 3) * 0.12 + 's'); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+        items.forEach(function (el) { io.observe(el); });
+      } else { items.forEach(function (el) { el.classList.add('in'); }); }
+
+      /* lightbox */
+      var lb = document.getElementById('lightbox');
+      var img = lb.querySelector('.lb-img');
+      var text = lb.querySelector('.lb-text');
+      var count = lb.querySelector('.lb-count');
+      var btns = [].slice.call(document.querySelectorAll('.g-btn'));
+      var cur = 0, lastFocus = null;
+
+      function data(i) {
+        var im = btns[i].querySelector('img');
+        return { src: im.getAttribute('data-full') || im.currentSrc || im.src, alt: im.alt, cap: btns[i].querySelector('figcaption').textContent };
+      }
+      function show(i, instant) {
+        cur = (i + btns.length) % btns.length;
+        var d = data(cur);
+        function apply() {
+          img.src = d.src; img.alt = d.alt; text.textContent = d.cap;
+          count.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(btns.length).padStart(2, '0');
+          img.classList.remove('swap');
+        }
+        if (instant) { apply(); return; }
+        img.classList.add('swap');
+        setTimeout(apply, 160);
+        var n = new Image(); n.src = data((cur + 1) % btns.length).src;
+      }
+      function open(i) {
+        lastFocus = document.activeElement;
+        lb.hidden = false;
+        show(i, true);
+        requestAnimationFrame(function () { lb.classList.add('open'); });
+        document.body.classList.add('lb-lock');
+        lb.querySelector('.lb-close').focus();
+      }
+      function close() {
+        lb.classList.remove('open');
+        document.body.classList.remove('lb-lock');
+        setTimeout(function () { lb.hidden = true; }, 350);
+        if (lastFocus) lastFocus.focus();
+      }
+
+      btns.forEach(function (b, i) { b.addEventListener('click', function () { open(i); }); });
+      lb.querySelector('.lb-close').addEventListener('click', close);
+      lb.querySelector('.lb-prev').addEventListener('click', function () { show(cur - 1); });
+      lb.querySelector('.lb-next').addEventListener('click', function () { show(cur + 1); });
+      lb.addEventListener('click', function (e) {
+        if (e.target === lb || e.target.classList.contains('lb-stage') || e.target.classList.contains('lb-fig')) close();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') show(cur - 1);
+        else if (e.key === 'ArrowRight') show(cur + 1);
+        else if (e.key === 'Tab') {
+          var f = lb.querySelectorAll('button'), first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+
+      var sx = null;
+      lb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', function (e) {
+        if (sx === null) return;
+        var dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 50) show(dx < 0 ? cur + 1 : cur - 1);
+        sx = null;
+      });
+    })();
+  </script>
+</body>
+
+</html>
